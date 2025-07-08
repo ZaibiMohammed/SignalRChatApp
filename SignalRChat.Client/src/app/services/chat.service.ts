@@ -26,16 +26,14 @@ export class ChatService {
   public startConnection(): Promise<void> {
     console.log('Starting SignalR connection...');
     
-    // Use a simpler connection approach without skipNegotiation
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:5289/chatHub')
       .withAutomaticReconnect()
-      .configureLogging(signalR.LogLevel.Debug) // Debug level logging
+      .configureLogging(signalR.LogLevel.Debug) 
       .build();
 
     this.registerSignalREvents();
     
-    // Handle connection state changes
     this.hubConnection.onclose(() => {
       console.log('SignalR connection closed');
       this.connectionIdSubject.next(null);
@@ -67,7 +65,6 @@ export class ChatService {
   }
 
   public stopConnection(): Promise<void> {
-    // Check if hubConnection exists before stopping
     if (this.hubConnection) {
       this.connectionIdSubject.next(null);
       return this.hubConnection.stop();

@@ -47,9 +47,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       message: ['', [Validators.required]]
     });
 
-    // Check if we're in the browser before accessing localStorage
     if (isPlatformBrowser(this.platformId)) {
-      // Try to get username from localStorage
       const savedUsername = localStorage.getItem('chat_username');
       if (savedUsername) {
         this.chatForm.get('username')?.setValue(savedUsername);
@@ -66,12 +64,11 @@ export class ChatComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         console.error('Error while starting connection: ', err);
-        // We'll handle connection status through the subscription
+        
       });
   }
   
   private subscribeToConnectionStatus(): void {
-    // Subscribe to connection status changes
     this.subscriptions.add(
       this.chatService.connectionStatus$.subscribe(isConnected => {
         console.log(`Connection status changed: ${isConnected ? 'Connected' : 'Disconnected'}`);
@@ -85,9 +82,8 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.chatService.messages$.subscribe(messages => {
         this.messages = messages;
         
-        // Only manipulate DOM in browser environment
+        
         if (isPlatformBrowser(this.platformId)) {
-          // Scroll to bottom on new message
           setTimeout(() => {
             const chatContainer = document.querySelector('.chat-messages');
             if (chatContainer) {
@@ -104,7 +100,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       const username = this.chatForm.get('username')?.value;
       const message = this.chatForm.get('message')?.value;
       
-      // Save username to localStorage (only in browser)
       if (this.username !== username) {
         this.username = username;
         if (isPlatformBrowser(this.platformId)) {
@@ -114,7 +109,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
       this.chatService.sendMessage(username, message)
         .then(() => {
-          // Clear message field after sending
           this.chatForm.get('message')?.reset();
         })
         .catch(err => console.error('Error sending message: ', err));
