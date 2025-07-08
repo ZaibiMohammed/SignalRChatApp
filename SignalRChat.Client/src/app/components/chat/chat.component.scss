@@ -1,0 +1,157 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.chat-header {
+  padding: 16px;
+  background-color: #0d6efd;
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.connection-status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  background-color: #dc3545;
+  
+  &.connected {
+    background-color: #198754;
+  }
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 400px;
+}
+
+.no-messages {
+  text-align: center;
+  color: #6c757d;
+  margin-top: 2rem;
+}
+
+.message {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  position: relative;
+  
+  &.my-message {
+    align-self: flex-end;
+    background-color: #0d6efd;
+    color: white;
+    
+    .message-header small {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  &.other-message {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #212529;
+  }
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  
+  small {
+    color: #6c757d;
+    margin-left: 8px;
+  }
+}
+
+.message-text {
+  word-break: break-word;
+}
+
+.chat-form {
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.username-input {
+  margin-bottom: 12px;
+}
+
+.message-input-container {
+  position: relative;
+}
+
+.input-group {
+  display: flex;
+  
+  .form-control {
+    border-radius: 4px 0 0 4px;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    
+    &:focus {
+      outline: none;
+      border-color: #86b7fe;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    &.is-invalid {
+      border-color: #dc3545;
+    }
+  }
+  
+  .btn {
+    border-radius: 0 4px 4px 0;
+    padding: 10px 16px;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    cursor: pointer;
+    
+    &:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+    
+    &:hover:not(:disabled) {
+      background-color: #0b5ed7;
+    }
+  }
+}
+
+.invalid-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
